@@ -1,0 +1,5 @@
+*.o
+display
+display.h
+string_structure
+structmain
