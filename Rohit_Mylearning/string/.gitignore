@@ -1,0 +1,9 @@
+*.o
+copy_string
+gets_fun
+reverse_string
+string1
+string2
+string_length
+string_ptr
+swap_string
