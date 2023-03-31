@@ -13,5 +13,25 @@ linklist/new_node_creation
 linklist/new_node_creation.s
 linklist/node_creating
 linklist/a.out
-
+MultiThread/multithread_mutex
+MultiThread/multithread_simple
+MultiThread/multithread_test
+Myprint/variable_argument
+Myprint/print
+Myprint/ellipse
+pointer/fun_pointer
+Socket/client
+Socket/client_sock_file
+Socket/server_sock_file
+Socket/udp_client
+Socket/udp_server
+string/string_length
+string/string2
+string/string1
+string/gets_fun
+string/copy_string
+string/string_ptr
+string/swap_string
+Structure/a.out
+Structure/string_structure
 
