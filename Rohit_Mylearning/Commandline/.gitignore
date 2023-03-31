@@ -1,0 +1,4 @@
+*.o
+cmd_add
+cmd
+commandline
