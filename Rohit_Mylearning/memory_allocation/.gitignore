@@ -1,0 +1,5 @@
+*.o
+memory_allocation
+memory_layout
+volatile_with_optimization
+volatile_without_optimization
