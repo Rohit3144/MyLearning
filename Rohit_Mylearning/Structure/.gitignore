@@ -1,4 +1,5 @@
 *.o
+*.swp
 display
 display.h
 string_structure
