@@ -30,7 +30,7 @@ int main(void) {
       exit(1);
    }
    printf("message queue: ready to send messages.\n");
-   printf("Enter lines of text, ^D to quit:\n");
+  // printf("Enter lines of text, ^D to quit:\n");
    buf.mtype = 1; /* we don't really care in this case */
    
    while(fgets(buf.mtext, sizeof buf.mtext, stdin) != NULL) {

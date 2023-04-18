@@ -12,10 +12,10 @@ int main(int argc, char *argv[])
         printf("Argument number argv[%d] = %s\n", i, argv[i]);
         sum = sum + atoi(argv[i]);
     }
-    printf("Sum = %d", sum);
+    printf("Sum = %d \n", sum);
         
-    //To add two numbers given by user
-/*    printf("Number of arguments are %d\n", argc);
+/*    //To add two numbers given by user
+    printf("Number of arguments are %d\n", argc);
     int a, b, sum;
     a = atoi(argv[1]);
     b = atoi(argv[2]);

@@ -1,4 +1,5 @@
 *.o
+strcmp
 copy_string
 gets_fun
 reverse_string
