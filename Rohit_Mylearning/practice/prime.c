@@ -2,25 +2,30 @@
 
 int main()
 {
-    int i, n, c = 0;
-    printf("Check number whether prime or not: \n");
-    scanf("%d", &n);
-
-    for(i=1; i<=n; i++)
+    int lower = 4, upper = 10, i, j, c;
+    /*printf("Enter the starting point:  ");
+    scanf("%d", &lower);
+    printf("\nEnter the ending point:  ");
+    scanf("%d", &upper);
+    */    
+    for(i=lower; i<=upper; i++)
     {
-        if(n%i==0)
-            c++;
-    }
-    printf("Counter is: %d\n", c);
+        //if(i == 0 || i == 1)
+            //continue;
 
-    if(c == 2)
-    {
-        printf("Number is prime\n");
-    }
-    else
-    {
-        printf("Number is not prime\n");
-    }
+        c = 1;
 
+        for(j=2; j<=i; ++j)
+        {
+            if(i%j == 0)
+            {
+                c = 0;
+                //break;
+            }
+        }
+        if(c == 1)
+            printf("%d", i);
+    }
+                   
     return 0;
 }
