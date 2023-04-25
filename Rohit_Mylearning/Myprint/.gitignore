@@ -3,3 +3,6 @@ ellipse
 print
 variable_args
 variable_argument
+shm_sem_server
+shm_sem_client
+time

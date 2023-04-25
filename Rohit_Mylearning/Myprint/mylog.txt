@@ -1,0 +1,13 @@
+[Mon Apr 24 10:42:49 2023] [shm_sem_client.c] [main] [22] Shared Memory created[0m
+[Mon Apr 24 10:42:50 2023] [shm_sem_client.c] [main] [32] Semaphore created
+[Mon Apr 24 10:42:51 2023] [shm_sem_client.c] [main] [41] Shared Memory Attached
+[Mon Apr 24 10:42:51 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:42:54 2023] [shm_sem_client.c] [main] [56] User has type the message: hi
+[Mon Apr 24 10:42:55 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:42:59 2023] [shm_sem_client.c] [main] [56] User has type the message: how are you 
+[Mon Apr 24 10:43:00 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:11 2023] [shm_sem_client.c] [main] [56] User has type the message: what are you doing here
+[Mon Apr 24 10:43:12 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:24 2023] [shm_sem_client.c] [main] [56] User has type the message: Go to home
+[Mon Apr 24 10:43:25 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:29 2023] [shm_sem_client.c] [main] [56] User has type the message: ok
+[Mon Apr 24 10:43:30 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:36 2023] [shm_sem_client.c] [main] [56] User has type the message: i am here to play
+[Mon Apr 24 10:43:37 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:50 2023] [shm_sem_client.c] [main] [56] User has type the message: what do you play
+[Mon Apr 24 10:43:51 2023] [shm_sem_client.c] [main] [52] Enter some text: [Mon Apr 24 10:43:58 2023] [shm_sem_client.c] [main] [56] User has type the message: end
+[Mon Apr 24 10:43:59 2023] [shm_sem_client.c] [main] [62] User has type the message: end
+[Mon Apr 24 10:43:59 2023] [shm_sem_client.c] [main] [71] Shared Memory Detached
