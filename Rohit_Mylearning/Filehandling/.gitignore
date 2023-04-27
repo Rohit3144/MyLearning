@@ -1,3 +1,6 @@
 *.o
 FileAdvance
 Filehandling
+a.out
+file_watch
+test.txt

@@ -14,6 +14,13 @@
 
 #define TEXT_SZ 32
 
+#define print_log(fmt, ...) \
+    fptr = fopen("mylog.txt", "a+");\
+    fprintf(fptr, "[%s] [%s] [%s] [%d] ", timestamp(), __FILE__, __func__, __LINE__);\
+    fprintf(fptr,(fmt), ##__VA_ARGS__);\
+    fprintf(fptr,"\n");\
+    fclose(fptr);
+
 struct sh_dat
 {
 	char text[TEXT_SZ];

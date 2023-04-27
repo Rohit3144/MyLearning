@@ -4,13 +4,14 @@
 
 FILE *fptr = NULL;
 
-#define print_log(f_, ...) printf("[%s] [%s] [%s] [%d] ", timestamp(), __FILE__, __func__, __LINE__), printf((f_), ##__VA_ARGS__), printf("\n")
-#define print_flog(f_, ...) fprintf(fptr, "[%s] [%s] [%s] [%d] ", timestamp(), __FILE__, __func__, __LINE__), fprintf(fptr, f_, ##__VA_ARGS__), fprintf(fptr,"\n")
+//#define print_log(f_, ...) printf("[%s] [%s] [%s] [%d] ", timestamp(), __FILE__, __func__, __LINE__), printf(f_, ##__VA_ARGS__), printf("\n")
+#define print_flog(f_, ...) fprintf(fptr, "[%s] [%s] [%s] [%d] ", timestamp(), __FILE__, __func__, __LINE__), fprintf(fptr,f_, ##__VA_ARGS__), fprintf(fptr,"\n")
 
 //#define print_log(f_, ...) printf((f_), ##__VA_ARGS__), printf("\n")     //Modified
 //#define print_log(f_, ...) printf("%s ", timestamp()), printf((f_), ##__VA_ARGS__), printf("\n")  //Original
 
-    char * timestamp(){
+char * timestamp()
+{
     time_t now = time(NULL);
     char * time = asctime(gmtime(&now));
     time[strlen(time)-1] = '\0';    // Remove \n
@@ -22,10 +23,10 @@ int main(int argc, char* argv[])
     fptr = fopen("log_file.txt", "a+");
     
     //print_log("[%s] [%s] [%s] [%d] Hello", timestamp(), __FILE__, __func__, __LINE__);
-    //print_log("Hello");
+    print_flog("Hello");
     //print_log("%s%d","mokumus",1996);
-    print_log("%s %d","mokumus",1996);
-    print_flog("%s %d", "Rohit", 2023);
+    print_flog("%s %d","mokumus",1996);
+    print_flog("%s %d","Rohit",2023);
 
     return 0;
 }
