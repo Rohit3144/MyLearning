@@ -1,16 +1,16 @@
 #include "shm_sem.h"
 
-extern FILE *fptr;
 
-char * timestamp()
+char *timestamp()
 {
     time_t ltime; // calendar time
-    ltime = time(NULL); // get current cal time 
+    ltime = time(NULL); // get current cal time
 
-    char * curr_local_time = asctime(localtime(&ltime));
+    char * curr_local_time = asctime(localtime( & ltime));
     curr_local_time[strlen(curr_local_time) - 1] = '\0'; // removed \n
     return curr_local_time;
 }
+
 void mycolor(int color)
 {
     printf("\033[1;%dm", color);
@@ -31,28 +31,28 @@ int genRandoms(int lower, int upper)
 
 int semaphore_p(int sem_id)
 {
-	struct sembuf sem_b;
-	sem_b.sem_num = 0;
-	sem_b.sem_op = -1;
-	sem_b.sem_flg = SEM_UNDO;
-	if(semop(sem_id, &sem_b, 1) == -1)
-	{
-		fprintf(fptr, "[%s] [%s] [%s] [%d] semaphore_p failed \n", timestamp(), __FILE__, __func__, __LINE__);
-		return 0;
-	}
-	return 1;
+    struct sembuf sem_b;
+    sem_b.sem_num = 0;
+    sem_b.sem_op = -1;
+    sem_b.sem_flg = SEM_UNDO;
+    if(semop(sem_id, & sem_b, 1) == -1)
+    {
+        print_flog("Semaphore_p failed");
+        return 0;
+    }
+    return 1;
 }
 
 int semaphore_v(int sem_id)
 {
-	struct sembuf sem_b;
-	sem_b.sem_num = 0;
-	sem_b.sem_op = 1;
-	sem_b.sem_flg = SEM_UNDO;
-	if(semop(sem_id, &sem_b, 1) == -1)
-	{
-		fprintf(fptr, "[%s] [%s] [%s] [%d] semaphore_v failed \n", timestamp(), __FILE__, __func__, __LINE__);
-		return 0;
-	}
-	return 1;
+    struct sembuf sem_b;
+    sem_b.sem_num = 0;
+    sem_b.sem_op = 1;
+    sem_b.sem_flg = SEM_UNDO;
+    if(semop(sem_id, & sem_b, 1) == -1)
+    {
+        print_flog("Semaphore_v failed");
+        return 0;
+    }
+    return 1;
 }
