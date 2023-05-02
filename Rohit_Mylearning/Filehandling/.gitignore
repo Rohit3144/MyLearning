@@ -4,3 +4,8 @@ Filehandling
 a.out
 file_watch
 test.txt
+file_watch_2
+popen
+sprintf
+create_multifiles
+file_copy

@@ -38,8 +38,8 @@ int main()
         charcount = ftell(fd);
         if(charcount > 2000)
         {
-            rewind(fd);     //It will put pointer in beginning of file
-            //fseek(fd, 1000, SEEK_SET);    //Here we can set position to pointer
+            //rewind(fd);     //It will put pointer in beginning of file
+            fseek(fd, 1000, SEEK_SET);    //Here we can set position to pointer
             printf("Position of pointer after setting pointer: %ld\n",ftell(fd));
             fprintf(fd, "[%s] [%s] [%s] [%d] Position of pointer after setting pointer: %ld\n", timestamp(), __FILE__, __func__, __LINE__, ftell(fd));
             fprintf(fd, "[%s] [%s] [%s] [%d] Rewind happend\n", timestamp(), __FILE__, __func__, __LINE__);
