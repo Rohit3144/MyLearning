@@ -13,7 +13,7 @@ int main()
         char filename[100];
         sprintf(filename, "file_%d.txt", i);
         files[i] = fopen(filename, "w");
-        //printf("%d\n", i); //just to see print statement
+        printf("file[%p]\n", files[i]); //just to see print statement
     }
 return 0;
 }

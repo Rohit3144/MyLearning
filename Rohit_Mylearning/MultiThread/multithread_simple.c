@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
     {
         thr_data[i].tid = i;
         thr_data[i].num1 = num11;
-	thr_data[i].num2 = num22;
+	    thr_data[i].num2 = num22;
 
 	//fun_ptr_arr[i](&thr_data[i]); // Run as process and comment below thread code
         if((rc = pthread_create(&thr[i], NULL, fun_ptr_arr[i], &thr_data[i])))

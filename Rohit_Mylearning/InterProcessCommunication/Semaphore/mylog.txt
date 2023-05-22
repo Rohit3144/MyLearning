@@ -11,3 +11,18 @@
 [Fri Apr 21 15:57:11 2023] [shm_sem_client.c] [main] [62] Enter some text: [Fri Apr 21 15:57:13 2023] [shm_sem_client.c] [main] [65] User has type the message: end
 [Fri Apr 21 15:57:14 2023] [shm_sem_client.c] [main] [71] User has type the message: end
 [Fri Apr 21 15:57:14 2023] [shm_sem_client.c] [main] [80] Shared Memory Detached
+[Wed May  3 12:28:48 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:28:50 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:28:55 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:29:03 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:29:20 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:29:23 2023] [shm_sem_server.c] [main] [61] Server reading
+[Wed May  3 12:28:48 2023] [shm_sem_client.c] [main] [37] Shared Memory created
+[Wed May  3 12:28:49 2023] [shm_sem_client.c] [main] [46] Semaphore created
+[Wed May  3 12:28:50 2023] [shm_sem_client.c] [main] [54] Shared Memory Attached
+[Wed May  3 12:28:50 2023] [shm_sem_client.c] [main] [62] Enter some text: [Wed May  3 12:28:55 2023] [shm_sem_client.c] [main] [65] User has type the message: hello
+[Wed May  3 12:28:56 2023] [shm_sem_client.c] [main] [62] Enter some text: [Wed May  3 12:29:03 2023] [shm_sem_client.c] [main] [65] User has type the message: today is Wednesday
+[Wed May  3 12:29:04 2023] [shm_sem_client.c] [main] [62] Enter some text: [Wed May  3 12:29:20 2023] [shm_sem_client.c] [main] [65] User has type the message: its May 3, 2023.
+[Wed May  3 12:29:21 2023] [shm_sem_client.c] [main] [62] Enter some text: [Wed May  3 12:29:23 2023] [shm_sem_client.c] [main] [65] User has type the message: end
+[Wed May  3 12:29:24 2023] [shm_sem_client.c] [main] [71] User has type the message: end
+[Wed May  3 12:29:24 2023] [shm_sem_client.c] [main] [80] Shared Memory Detached

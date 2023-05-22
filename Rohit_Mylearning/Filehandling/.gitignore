@@ -9,3 +9,5 @@ popen
 sprintf
 create_multifiles
 file_copy
+cmd_file 
+line_count

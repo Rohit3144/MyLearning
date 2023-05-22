@@ -10,3 +10,5 @@ shm_sem_util
 shm_sem
 log_file.txt
 mylog.txt
+time_ms
+a.out

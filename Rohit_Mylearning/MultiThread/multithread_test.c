@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
     
-//    mysum(num11, num22);
+    //mysum(num11, num22);
     pthread_t thread_id;
     printf("Before thread File name:[%s] Func name:[%s] Line no:[%d]\n",__FILE__, __func__, __LINE__);
 
