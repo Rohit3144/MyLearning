@@ -3,8 +3,8 @@ const app = express();
 app.use(express.json());
 
 const cources = [
-    { id : 1,  name : 'physics'},
-    {id : 2,  name : 'chemistry'},
+    {id : 7,  name : 'physics'},
+    {id : 5,  name : 'chemistry'},
     {id : 3,  name : 'math'}
 ];
 
@@ -14,16 +14,43 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/api/cources', (req,res) => {
-    console.log("This is get API");
+    console.log("books sent to client");
     res.send( cources);
 })
 
 
 app.get('/api/cources/:id', (req,res) => {
-    console.log("This is another get api");
+    console.log("book with id sent to client");
     const cource = cources.find( c => c.id === parseInt(req.params.id) )
-    if (!cource) res.status(404).send("not found, please give a valid id")
+    if (!cource) res.status(404).send("not found")
     res.send(cource)
+})
+
+app.delete('/api/cources/:id', (req, res) => {
+    console.log("Calling Delete RestAPI");
+    //console.log("My request is = ", req);
+    let index = cources.findIndex(c => c.id === parseInt(req.params.id))
+    console.log("index = ", index);
+    if(index == -1)
+        res.status(404).send("Invalid ID "+req.params.id);
+    //delete cources[index]; // it will leave hole in memory
+    cources.splice(index);
+    res.send(cources)
+})
+
+app.patch('/api/cources/:id', (req, res) => {
+    console.log("Calling Patch RestAPI");
+    //console.log("My request is = ", req);
+    let index = cources.findIndex(c => c.id === parseInt(req.params.id))
+    console.log("index = ", index);
+    if(index == -1)
+        res.status(404).send("Invalid ID "+req.params.id);
+    console.log("Body is ", req.body);
+    if(req.body) {
+        cources[index].id = req.body.id;
+        cources[index].name = req.body.name;
+    }   
+    res.send(cources)
 })
 
 
@@ -51,62 +78,29 @@ app.get('/api/cources/:id/search/?', (req,res) => {
 app.post('/api/cources/', (req, res) => {
     console.log("indside post API");
     console.log(req.body);
-    obj = new Object();
-    if ( req.body.id) {
-        console.log("id available");
-        obj.id = req.body.id;
-    }
-    if ( req.body.name) {
-        console.log("name available");
-        obj.name = req.body.name;
+
+    function rollinglist(item) {
+        obj = new Object();
+        if(item.id) {
+            console.log("id available");
+            obj.id = item.id;
+        }
+        if(item.name) {
+            console.log("name available");
+            obj.name = item.name;
+        }
+        console.log(obj);
+        cources.push(obj);
     }
 
-    console.log(obj);
-    cources.push(obj);
+    if(Array.isArray(req.body)) {
+        req.body.forEach(rollinglist);
+    } else {
+        rollinglist(req.body);
+    }
     res.send(cources);
 });
 
-/*app.patch('/api/cources/', (req,res) => {
-    console.log("Patch is not yet implemented !");
-    res.send( "Patch is not yet implemented");
-})
-*/
-app.put('/api/cources/', (req,res) => {
-    console.log("Put is not yet implemented !");
-    res.send( "Put is not yet implemented");
-})
-
-/*app.delete('/api/cources/', (req,res) => {
-    console.log("Delete is not yet implemented !");
-    res.send( "Delete is not yet implemented");
-})
-*/
-app.delete('/api/cources/:id', (req, res) => {
-    console.log("Calling Delete RestAPI");
-    //console.log("My request is = ", req);
-    let index = cources.findIndex(c => c.id === parseInt(req.params.id))
-    console.log("index = ", index);
-    if(index == -1)
-        res.status(404).send("Invalid ID "+req.params.id);
-    //delete cources[index]; // it will leave hole in memory
-    cources.splice(index);
-    res.send(cources)
-})
-
-app.patch('/api/cources/:id', (req, res) => {
-    console.log("Calling Patch RestAPI");
-    //console.log("My request is = ", req);
-    let index = cources.findIndex(c => c.id === parseInt(req.params.id))
-    console.log("index = ", index);
-    if(index == -1)
-        res.status(404).send("Invalid ID "+req.params.id);
-    console.log("Body is ", req.body);
-    if(req.body) {
-        cources[index].id = req.body.id;
-        cources[index].name = req.body.name;
-    }
-    res.send(cources)
-})
 
 app.listen(3333, console.log('listening at port 3333 ...'));
 
