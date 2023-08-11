@@ -5,6 +5,7 @@ let MongoClient = require('mongodb').MongoClient;
 let bodyParser = require('body-parser');
 let app = express();
 
+#console.log("response.status", response.status);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
     console.log("GET /");
+    console.log("This is app.get function");
     res.sendFile(path.join(__dirname, "index.html"));
   });
 
@@ -60,6 +62,7 @@ app.post('/update-profile', function (req, res) {
 
 app.get('/get-profile', function (req, res) {
   let response = {};
+    console.log("This is line number 62 in app.get function");
   console.log("GET /get-profile");
   // Connect to the db
   //MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {

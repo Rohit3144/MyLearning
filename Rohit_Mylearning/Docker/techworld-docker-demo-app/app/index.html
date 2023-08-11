@@ -44,11 +44,12 @@
 <script>
     (async function init() {
         const response = await fetch('http://192.168.56.103:3000/get-profile');
-        console.log("response", response);
+        console.log("response = ", response);
+        console.log("response.status = ", response.status);
         const user = await response.json();
         console.log(JSON.stringify(user));
 
-        document.getElementById('name').textContent = user.name ? user.name : 'Rohit Smith';
+        document.getElementById('name').textContent = user.name ? user.name : 'xAnna Smith';
         document.getElementById('email').textContent = user.email ? user.email : 'anna.smith@example.com';
         document.getElementById('interests').textContent = user.interests ? user.interests : 'coding';
 
@@ -60,6 +61,7 @@
         const contEdit = document.getElementById('container-edit');
         const cont = document.getElementById('container');
 
+        console.log("This is function handleUpdateProfileRequest");
         const payload = {
             name: document.getElementById('input-name').value, 
             email: document.getElementById('input-email').value, 
@@ -88,6 +90,7 @@
         const contEdit = document.getElementById('container-edit');
         const cont = document.getElementById('container');
 
+        console.log("This is function updateProfile ");
         document.getElementById('input-name').value = document.getElementById('name').textContent;
         document.getElementById('input-email').value = document.getElementById('email').textContent;
         document.getElementById('input-interests').value = document.getElementById('interests').textContent;

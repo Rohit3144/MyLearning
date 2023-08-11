@@ -1,0 +1,10 @@
+services:
+  movie-copy:
+    build: .
+    image: movie_app
+    restart: always
+    deploy:
+      replicas: 2
+    ports:
+      - 3333-3337:3000
+

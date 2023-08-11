@@ -38,8 +38,8 @@ app.post('/update-profile', function (req, res) {
   let userObj = req.body;
   console.log("GET /update-profile");
 
-  MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
-  //MongoClient.connect(mongoUrlDocker, mongoClientOptions, function (err, client) {
+  //MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
+  MongoClient.connect(mongoUrlDocker, mongoClientOptions, function (err, client) {
     if (err) throw err;
 
     let db = client.db(databaseName);
@@ -62,8 +62,8 @@ app.get('/get-profile', function (req, res) {
   let response = {};
   console.log("GET /get-profile");
   // Connect to the db
-  MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
-  //MongoClient.connect(mongoUrlDocker, mongoClientOptions, function (err, client) {
+  //MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
+  MongoClient.connect(mongoUrlDocker, mongoClientOptions, function (err, client) {
     if (err) throw err;
 
     let db = client.db(databaseName);
