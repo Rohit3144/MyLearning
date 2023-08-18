@@ -1,0 +1,8 @@
+services:
+  my-app:
+    build: .
+    image: docker_react 
+    restart: always
+    ports:
+      - 4444:3000
+
