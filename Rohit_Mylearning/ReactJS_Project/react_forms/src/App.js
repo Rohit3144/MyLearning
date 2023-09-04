@@ -3,7 +3,7 @@ import { useState } from "react";
 import './App.css';
 
 function App() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
   const [userInfo, setUserinfo] = useState();
 
   const onSubmit = (data) => {
@@ -24,10 +24,13 @@ function App() {
             <input
               type="text"
               // name="username"
-              placeholder="username"
+              placeholder="your name"
               {...register('username', { required: true })}
             />
+            {/* <i class="address book outline icon"></i> */}
+            {errors.username && <p>This field is required</p>}
           </div>
+          
           <div className="field">
             <label>email</label>
             <input
@@ -42,6 +45,7 @@ function App() {
                 }
               })}
             />
+            {errors.username && <p>This field is required</p>}
           </div>
           <div className="field">
             <label>password</label>
@@ -64,9 +68,10 @@ function App() {
               placeholder="password"
 
             />
+            {errors.username && <p>This field is required</p>}
           </div>
+          <button className="fluid ui button red">Submit</button>
         </div>
-        <button className="fluid ui button red">Submit</button>
       </form>
     </div>
   );

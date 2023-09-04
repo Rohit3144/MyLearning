@@ -49,3 +49,12 @@ button {
     transform: rotate(360deg);
   }
 }
+
+p {
+  color: red
+}
+
+p::before {
+  display: inline-block;
+  content: "⚠ ";
+}
