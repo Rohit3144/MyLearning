@@ -1,10 +1,12 @@
 import './App.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { useEffect };
 
 function App() {
   const initialValue = { username: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValue);
   const [formErrors, setformErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   // console.log("formValue = ", formValues);
 
@@ -27,7 +29,15 @@ function App() {
     console.log("Submit ==> ", formValues);
     //Validate the form values
     setformErrors(validate(formValues));
+    setIsSubmit(true);
   }
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
 
   function validate(values) {
     const errors = {};
@@ -44,8 +54,7 @@ function App() {
       errors.email = "Email is required";
     }
     // email validation
-    else if (!regex_email.test(values.email))
-    {
+    else if (!regex_email.test(values.email)) {
       errors.email = "Email format is not valid";
       // console.log(errors.email);
     }
@@ -61,7 +70,26 @@ function App() {
 
   return (
     <div className="container">
-      <pre> {JSON.stringify(formValues, undefined, 4)} </pre>
+      {
+        Object.keys(formErrors).length === 0 && isSubmit ?
+        (<div className='ui message success'>Signed in Successfully</div>) :
+        (<div>
+          <div 
+          className='ui message success'
+            style={
+            {
+              color: "green",
+              background: "yellow"
+            }
+          }>
+            Failed attempt</div>
+          <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+        </div>)
+      }
+
+      {/* To display on the screen */}
+      {/* <pre> {JSON.stringify(formValues, undefined, 4)} </pre> */}
+
       <form onSubmit={handleSubmit}>
         <h1>Login Form</h1>
         <div className="ui divider"></div>
