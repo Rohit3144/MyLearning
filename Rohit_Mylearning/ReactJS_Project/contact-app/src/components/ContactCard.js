@@ -7,22 +7,18 @@ const ContactCard = (props) => {
 
     return (
         <div className="item">
-            <img className="ui avatar image" src={url} alt="No image"/>
-            <div>{id}</div>
+           <div><img className="ui avatar image" src={url} alt="No image"/> </div>
+            {/* <img className="ui avatar image" src={url} alt="No image"/>  */}
+            <div> hellow</div>
+            <div className="header">{id}</div>
+            <div className="header">{name}</div>
             <img className="ui avatar image" src={avatar} alt="No image"/>
-            <div>{name}</div>
+            <div>{email}</div>
             {/* <div>{email}</div> */}
             <i
                 className="trash alternate outline icon"
-                style={
-                    {
-                        // position: "relative",
-                        color: "red ",
-                        marginLeft: "20px",
-                        paddingLeft: "20px",
-                        float: "right"
-                    }
-                }>
+                
+                >
             </i>
         </div>
     );
