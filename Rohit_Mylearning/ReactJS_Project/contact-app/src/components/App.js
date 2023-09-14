@@ -5,24 +5,22 @@ import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 
-const contactList = [
-  {
-    id: "1",
-    name: "Rohit",
-    email: "abc@gmai.com"
-  },
-  {
-    id: "2",
-    name: "Kuhar",
-    email: "qwe@gmail.com"
-  }
-]
+// const contactList = [
+//   {
+//     id: "1",
+//     name: "Rohit",
+//     email: "abc@gmai.com"
+//   },
+//   {
+//     id: "2",
+//     name: "Kuhar",
+//     email: "qwe@gmail.com"
+//   }
+// ]
 
 // const addConactHandler = (contacts) => {
 //   console.log("contacts => ", contacts);
 // }
-
-
 
 function App() {
 
@@ -31,7 +29,7 @@ function App() {
 
   const addConactHandler = (c) => {
     console.log("contacts => ", c);
-    setContacts([...contacts, c]);
+    setContacts([...contacts, { id: uuid(), ...c }]);
   };
 
   useEffect(() => {
@@ -39,20 +37,26 @@ function App() {
     if (retriveContacts.length) {
       setContacts(retriveContacts)
     }
-  }, []);
+  }, []); // [] is called once when page is refreshed
 
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-  }, [contacts]);
- 
+  }, [contacts]); // it will be called when "contacts" get updated
+
+  const removeContactHandler = (id) => {
+    const newContactList = contacts.filter((c) => {
+      return c.id !== id;
+    })
+    setContacts(newContactList);
+  }
 
   return (
-    <div className="ui container">
+    <div className="ui container" >
       <Header />
-      <AddContact myAddContactHandler={addConactHandler}/>
-      <ContactList mycontacts = {contacts}/>
-    </div>
+      <AddContact myAddContactHandler={addConactHandler} />
+      <ContactList mycontacts={contacts} getContactId={removeContactHandler} />
+    </div >
 
   );
 }
