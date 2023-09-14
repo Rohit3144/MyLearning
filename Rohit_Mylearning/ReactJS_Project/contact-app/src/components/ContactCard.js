@@ -7,18 +7,17 @@ const ContactCard = (props) => {
 
     return (
         <div className="item">
-           <div><img className="ui avatar image" src={url} alt="No image"/> </div>
+            <div><img className="ui avatar image" src={url} alt="No" /> </div>
             {/* <img className="ui avatar image" src={url} alt="No image"/>  */}
             <div> hellow</div>
             <div className="header">{id}</div>
             <div className="header">{name}</div>
-            <img className="ui avatar image" src={avatar} alt="No image"/>
+            <img className="ui avatar image" src={avatar} alt="No" />
             <div>{email}</div>
             {/* <div>{email}</div> */}
             <i
                 className="trash alternate outline icon"
-                
-                >
+                onClick={() => props.clickHandler(id)}>
             </i>
         </div>
     );
