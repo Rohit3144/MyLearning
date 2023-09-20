@@ -1,13 +1,22 @@
 import './App.css';
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 
 function App() {
   const [counter, setCounter] = useState(1);
   const [name, SetName] = useState("");
-  let result = useMemo(() => { 
+
+  let result = useMemo(() => {
     return factorial(counter);
-    }, [counter]);
+  }, [counter]);
+
+  // const displayName = () => {
+  //   return name;
+  // }
+
+  const displayName = useCallback((greeting) => {
+    return greeting + " " + name;
+  }, [name])
 
   return (
     <div className="App">
@@ -29,17 +38,23 @@ function App() {
         >
         </input>
         <hr></hr>
-        <DisplayName name = {name} />
-        
+        <DisplayName displayName={displayName} />
+
         {/* <button></button> */}
       </div>
     </div>
   );
 }
 
-const DisplayName = React.memo(({name}) => {
-  console.log("name ==> ", name);
-  return <p>{`My name is ${name}`}</p>
+const DisplayName = (({ displayName }) => {
+  const [value, setValue] = useState();
+
+  useEffect(() => {
+    setValue(displayName());
+    console.log("name ==> displayName Hits");
+  }, [displayName])
+  
+  return <p>{`My name is ${value}`}</p>
 })
 
 function factorial(n) {
