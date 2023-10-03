@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+    <style>
+        .box {
+            font-size: 25px;
+            text-align: center;
+            color: white;
+            background-color: red;
+            display: none;
+        }
+
+        @media (max-width: 300px) {
+            #box1 {
+                display: block;
+                background-color: cyan;
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+            #box2 {
+                display: block;
+                background-color: blueviolet;
+            }
+        }
+
+        @media (min-width: 500px) and (max-width: 800px) {
+            #box3 {
+                display: block;
+                background-color: yellow;
+            }
+        }
+
+        @media (min-width: 800px) {
+            #box4 {
+                display: block;
+                background-color: green;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box1">Iphone</div>
+    <div class="box" id="box2">tablet</div>
+    <div class="box" id="box3">Computer</div>
+    <div class="box" id="box4">Wide computer</div>
+</body>
+
+</html>
