@@ -11,10 +11,22 @@
             color: whitesmoke;
             margin: 0px;
             padding: 0px;
-            background: url('img/bg.jpg');
+            /* position: absolute; */
+            /* background: url('img/bg.jpg'); */
             background-repeat: no-repeat;
             background-size: 1370px 800px;
+            /* opacity: 0.5; */
             /* background-position: top top; */
+        }
+        body::before{
+            position: absolute;
+            content:"";
+            /* if don't want to repeat then use no-repeat */
+            background: url('img/bg.jpg') center;
+            opacity: 0.5;
+            height: 650px;
+            width: 1400px;
+            z-index: -1;
         }
 
         .left {
@@ -86,7 +98,7 @@
         }
 
         .container {
-            color: royalblue;
+            color: red;
             /* border: 3px solid white; */
             width: 303px;
             margin: 154px 340px;
