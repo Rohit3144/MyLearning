@@ -1,0 +1,119 @@
+/* CSS Reset  */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* CSS variable */
+:root {
+    --navbar-height: 100px;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+}
+#navbar::before{
+    content: "";
+    background-color: black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .5;
+}
+
+/* Navigation bar: Logo and Image */
+#logo {
+    margin: 10px 10px;
+}
+
+#logo img {
+    margin: 10px 10px;
+}
+
+/* Navigation bar: List styling */
+#navbar{
+    position: relative;
+}
+#navbar ul {
+    display: flex;
+}
+
+#navbar ul li{
+    /* color: red; */
+    list-style: none;
+    font-size: 1.3rem;
+}
+#navbar ul li a{
+    color: white;
+    display: block;
+    padding: 3px 20px;
+    border-radius: 10px;
+    /* To remove underline */
+    text-decoration: none;
+}
+#navbar ul li a:hover{
+    color: green;
+    background-color: white;
+}
+#home{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    padding: 3px 200px;
+    justify-content: center;
+    align-items: center;
+}
+#home::before{
+    content: "";
+    background-color: black;
+    /* background: url('../bg1.jpg') no-repeat center center/cover; */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .5;
+}
+#home h1{
+    color: white;
+    text-align: center;
+}
+#home p{
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+}
+/* Service section */
+#services{
+    margin: 34px;
+    display: flex;
+}
+#services .box{
+    border: 2px solid brown;
+}
+#services .box img{
+    height: 160px;
+}
+
+/* utility class */
+.h-primary{
+    font-size: 3.8rem;
+    padding: 12px;
+}
+.h-secondary{
+    font-size: 2.8rem;
+    padding: 12px;
+}
+.btn{
+    padding: 6px 20px;
+    border: 2px solid white;
+    background-color: yellowgreen;
+    color: white;
+    margin: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.center{
+    text-align: center;
+}
