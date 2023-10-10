@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json tut in javascript</title>
+</head>
+
+<body>
+    <div class="container">
+        This is json tut
+    </div>
+    <script>
+        let jsonObj = {
+            name: 'Rohit',
+            channel: 'not available',
+            friend: 'Rahul',
+            food: 'Rasili'
+        }
+        console.log('This is my json object ', jsonObj);
+
+        let myjson = JSON.stringify(jsonObj);
+        console.log(myjson);
+
+        myjson = myjson.replace('Rohit', 'Rahul');
+        console.log(myjson);
+
+        myjsonParse = JSON.parse(myjson);
+        console.log(myjsonParse);
+    </script>
+</body>
+
+</html>

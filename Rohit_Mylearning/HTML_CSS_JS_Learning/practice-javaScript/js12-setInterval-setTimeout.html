@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetInterval and setTimeout functions in js</title>
+</head>
+<body>
+    <div class="container">
+        Time now is <span id="time"></span>
+    </div>
+
+    <script>
+        console.log("This is tutorial 58");
+    // setTimeout --> Alllows us to run the function once after the interval of time
+    // clearTimeout --> Alllows us to run the function repeatedly after the interval of time
+
+    // function greet(name, byeText){
+    //     console.log('Good morning ' + name + " " + byeText);
+    // }
+    // //  setTimeout(greet, 5000, 'Rohit', 'just take care!!!');
+    // timeOut = setTimeout(greet, 5000, 'Rohit', 'just take care!!!');
+    // clearTimeout(timeOut);
+
+    // setInterval(greet, 1000, "Rohit", "Good Night");
+    function displayTime(){
+        
+        var time = new Date();  // not compulsory to use var, let for variables in js
+
+        console.log(time);
+        // it will show time changing
+        document.getElementById('time').innerHTML = time;
+    }
+    setInterval(displayTime,  1000);
+
+    </script>
+</body>
+</html>

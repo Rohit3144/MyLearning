@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date and Time</title>
+</head>
+<style>
+    .container {
+        font-size: 23px;
+        background-color: blanchedalmond;
+        border: 2px solid grey;
+        padding: 34px;
+        margin: 4px;
+        text-align: center;
+    }
+
+    #time {
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <div class="container">
+        Current time is <span id="time"></span>
+    </div>
+    <script>
+        console.log('This is a date and time tut')
+        // let now = new Date();
+        // console.log(now);
+
+        // let n = new Date(0);
+        // console.log(n);
+        // Thu Jan 01 1970 05:30:00 GMT+0530 (India Standard Time) -- Epoch time is the output of above console.log
+
+        // let newDate = new Date("2029-09-30");
+        // console.log(newDate)
+
+
+        // let newDate = new Date(year, month, date, hours, minute, second, miliseconds);
+        // let newDate = new Date(3020, 4, 6, 9, 3, 2, 34);
+        // console.log(newDate);
+
+        let newDate = new Date();
+        console.log(newDate)
+
+        // let yr = newDate.getFullYear();
+        // console.log("The year is ", yr);
+
+        // let dat = newDate.getDate();
+        // console.log("The date is ", dat);
+
+        // let month = newDate.getMonth();
+        // console.log("The month is ", month);
+
+        // let hours = newDate.getHours();
+        // console.log("The hours is ", hours);
+
+        setInterval(updateTime, 2000)
+
+        function updateTime() {
+            time.innerHTML = new Date();
+        }
+    </script>
+</body>
+
+</html>
