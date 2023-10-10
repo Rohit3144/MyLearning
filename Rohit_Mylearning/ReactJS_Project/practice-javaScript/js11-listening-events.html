@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening events</title>
+    <style>
+        #btn {
+            border: 2px solid rebeccapurple;
+            background-color: turquoise;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>This is my heading</h1>
+        <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium esse recusandae unde odit
+            dicta? Animi
+            rem magnam nobis neque aut quaerat inventore assumenda, omnis laboriosam, quibusdam necessitatibus
+            distinctio reprehenderit ab?</p>
+    </div>
+    <button id="btn" onclick="toggleHide()">show/hide</button>
+</body>
+<script>
+    let para = document.getElementById('para');
+    para.addEventListener('mouseover', function run() {
+        // alert('mouse is inside paragraph');
+        console.log('mouse is inside paragraph')
+    });
+    para.addEventListener('mouseout', function run() {
+        // alert('mouse is now outside paragraph');
+        console.log('mouse is now outside paragraph')
+    });
+
+    function toggleHide() {
+        // let btn = document.getElementById('btn');
+        let para = document.getElementById('para');
+        if (para.style.display != 'none') {
+            para.style.display = 'none'
+        }
+        else {
+            para.style.display = 'block'
+        }
+    }
+</script>
+
+</html>
