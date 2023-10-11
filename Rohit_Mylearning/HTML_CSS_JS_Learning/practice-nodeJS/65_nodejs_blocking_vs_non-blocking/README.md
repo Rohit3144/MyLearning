@@ -1,6 +1,6 @@
 ## Initialize the NPM package
     `npm init`
-    `npm install node`
+    `npm install fs`
 
 ## Execute the commands
     `npm install` --> It will install all libraries
