@@ -1,0 +1,14 @@
+{
+  "name": "67_custom_backend_nodejs",
+  "version": "1.0.0",
+  "description": "`npm init`\r     `npm install fs`",
+  "main": "nodejs4.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^20.7.0"
+  }
+}

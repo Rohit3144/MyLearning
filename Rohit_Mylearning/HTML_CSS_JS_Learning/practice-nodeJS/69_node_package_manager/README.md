@@ -4,4 +4,5 @@
 
 ## Execute the commands
     `npm install` --> It will install all libraries
-    `node nodejs2.js` --> To run the nodejs server
+    `node index.js` --> To run the nodejs server
+    `node mod.js` --> To run mode.js file through nodejs
