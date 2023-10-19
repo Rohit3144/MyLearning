@@ -1,0 +1,16 @@
+{
+  "name": "79_contact-form_using-_pug",
+  "version": "1.0.0",
+  "description": "`npm init`\r     `npm install node`\r     `npm install fs`\r     `npm install express`\r     `npm install pug`",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^21.0.0",
+    "pug": "^3.0.2"
+  }
+}

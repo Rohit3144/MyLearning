@@ -1,0 +1,38 @@
+h1{
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+    /* margin: 12px 0; */
+}
+.container{
+    /* justify-content: center; */
+    min-height: 76vh;
+    /* display: flex;
+    align-items: center;
+    flex-direction: column; */
+
+}
+
+.myForm{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    /* width: 100%; */
+}
+
+.myInput{
+    font-size: 20px;
+    width: 40%;
+    padding: 10px;
+    margin: 10px; 
+    border: 2px solid goldenrod;
+    border-radius: 10px;
+    /* outline: none; // if outline occured in the text area then use this field */
+}
+.btn{
+   padding: 10px; 
+   border: 2px solid red;
+   border-radius: 10px;
+   font-size: 20px;
+}

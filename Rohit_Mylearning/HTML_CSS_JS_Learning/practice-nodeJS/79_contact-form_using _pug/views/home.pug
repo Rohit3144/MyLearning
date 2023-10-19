@@ -1,0 +1,58 @@
+extends base.pug
+
+block scripts 
+    script(src='/static/index.js')
+
+block style
+    style 
+        include ../static/style.css
+
+block content 
+    //- nav#navbar
+    //-     ul
+    //-         div#logo
+    //-             img(src='/static/img/3.png')
+    //-             h5 RDX
+    //-         li #[a(href='/') Home ]
+    //-         li #[a(href='/') About ]
+    //-         li #[a(href='/') Service ]
+    //-         li #[a(href='/') Class Info]
+    //-         li #[a(href='/') Contact us]
+
+    section#introsection
+        div Welcome to RK dance academy 
+        div.small Eat Sleep Dance Repeat
+
+    section#missionsection 
+        h2 our mission
+        div.card 
+            h3 Dance perfection
+            div.card-box
+                div.card-img
+                    img(src='/static/img/1.png')
+
+                div.card-content 
+                    p This is the best dance academy of Delhi
+        div.card 
+            h3 Dance the way you like
+            div.card-box
+                div.card-img
+                    img(src='/static/img/1.png')
+
+                div.card-content 
+                    p This is the best dance academy of Delhi
+        div.card 
+            h3 Expert teaching
+            div.card-box
+                div.card-img
+                    img(src='/static/img/3.png')
+
+                div.card-content 
+                    p This is the best dance academy of Delhi
+    section#sponsorsection
+        h2 our sponsors
+        div#sponsor
+            img(src='/static/img/apple_logo.png', alt='sponsor image', class='spImage')
+            img(src='/static/img/skype_logo.png', alt='sponsor image', class='spImage')
+            img(src='/static/img/hp_logo.png', alt='sponsor image', class='spImage')
+            img(src='/static/img/insta_logo.png', alt='sponsor image', class='spImage')
