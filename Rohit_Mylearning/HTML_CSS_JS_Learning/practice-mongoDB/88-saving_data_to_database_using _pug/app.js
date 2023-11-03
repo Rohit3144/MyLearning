@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 // const fs = require("fs");
 const app = express();
+const bodyparser = require('body-parser');
 const port = 3000;
 var mongoose=require("mongoose");
 // mongoose.connect('mongodb://localhost/contactDance', {useNewParser: true})
@@ -16,7 +17,7 @@ var contactSchema = new mongoose.Schema({
     description: String
   });
 
-  var contact = mongoose.model('contact', contactSchema);
+  var dataContact = mongoose.model('contact', contactSchema);
 
 // Express specific stuff
 app.use('/static', express.static('static'))        // for serving static files
@@ -40,6 +41,15 @@ app.get('/contact', (req, res) => {
     const params = { }
     res.status(200).render('contact.pug', params)
 });
+
+app.post('/contact',(req,res)=>{
+    var myData = new dataContact(req.body);
+    myData.save().then(()=>{
+        res.send("Item saved successfully");
+    }).catch(()=>{
+        res.status(400).send("Item is not saved to the database");
+    });
+    })
 
 // Start the server
 app.listen(port, () => {
