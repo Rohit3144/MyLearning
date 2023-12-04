@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Function statement aka Function Declaration
+    // a();
+    // function a() {
+    //     console.log("This is function statement");
+    // }
+    // a();
+    // // Function expression
+    // // b(); //It will throw an error (related to Hoisting)
+    // var b = function () {
+    //     console.log("This is function expression");
+    // }
+    // b();
+
+    //Anonymous Function // Anonymous functions are used in a place where functions are used as a value
+    // A function without name is called anonymous function but a function statement should have a name means it should be given to any variable
+    // Example :- var b = function () {
+    //     console.log("This is function expression");
+    // }
+    // function () {
+    //     console.log("This is function expression");
+    // }
+
+
+    //Named Function
+    // ab(); //Error
+    var b = function ab() {
+        console.log(ab);    //Passing function inside a function
+        console.log("Hello js");
+    }
+    b();
+    // ab(); // Unreference Error
+
+    //Difference between Parameters and Arguments
+    var bb = function (param1, param2) {
+        console.log("Hello java script");
+        console.log(param1);
+    }
+    bb(10,20);
+
+    //First class function - The ability to use functions as values is known as first class function
+    
+</script>
+</html>
