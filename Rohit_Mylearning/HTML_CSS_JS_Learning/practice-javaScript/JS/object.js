@@ -2,7 +2,7 @@
 // Destructuring
 
 const user = new Object()   // Singleton object
-console.log(user)
+// console.log(user)
 const user1 = {}    // non-singleton object
 
 user1.id = '123asd'

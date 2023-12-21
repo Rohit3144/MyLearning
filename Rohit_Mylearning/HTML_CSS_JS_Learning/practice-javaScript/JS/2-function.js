@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Functions in detail</h1>
-</body>
-<script>
-
     // a();
 
     // // Function statement
@@ -44,6 +32,3 @@
     // x(function y() {
     //     console.log("Hello function y");
     // })
-
-</script>
-</html>

@@ -23,4 +23,30 @@ const num = [1,2,3,4,5,6,7,8,9]
 const newNum = num.reduce(function (acc, currval) {
     return acc + currval
 }, 0)
-console.log(newNum)
+// console.log(newNum)
+
+const user = [
+    { fn: "Rohit", ln: "Kuhar", location: 'India' },
+    { fn: "Donald", ln: 'Trump', location: 'USA' },
+    { fn: 'Narender', ln: 'Modi', location: 'India'}
+]
+
+// Reduce
+const output = user.reduce( function (acc, curr)  {
+    if(acc[curr.location])
+    {
+        acc[curr.location] = ++acc[curr.location]
+    }
+    else {
+        acc[curr.location] = 1
+    }
+    return acc;
+},  {} )
+// console.log(output)
+
+// Filter
+const filterOutput = user
+            .filter( (x) => (x.location == "India") )
+            .map( (x) => (x.fn) )
+console.log(filterOutput)
+            
