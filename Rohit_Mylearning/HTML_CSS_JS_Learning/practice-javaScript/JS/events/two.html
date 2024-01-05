@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is 2nd event Document</title>
+</head>
+<body>
+    <h1>This is java script</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+</body>
+<script>
+    // setInterval( function() {
+    //     console.log('Rohit', Date())
+    //     console.log('Rohit', Date.now()) -->
+
+    // }, 1000)
+
+    const sayDate = function() {
+        console.log('Rohit', Date())
+    }
+    // let intervalId = setInterval(sayDate, 1000)
+    let intervalId;
+    // let intervalId1 = null;
+
+    // clearInterval(intervalId)
+
+    // START button
+    document.querySelector('#start').addEventListener('click', function() {
+        intervalId = setInterval(sayDate, 1000)
+        // intervalId1 = setInterval(sayDate, 1000)
+        console.log('Start')
+    })
+
+    // STOP button
+    document.querySelector('#stop').addEventListener('click', function() {
+        clearInterval(intervalId)
+        console.log('Interval cleared')
+        // clearInterval(intervalId1)
+    } )
+
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome Java Script</h1>
+</body>
+<script>
+    // console.log("Hello World !!!!!");
+    // console.log(a);
+    // console.log('hello');
+    // let a;
+
+    //  // 2nd
+    // function x() {
+    //     var a = 7;
+    //     function y() {
+    //         console.log(a);
+    //     }
+    //     return y;
+    // }
+    // var z = x();
+    // console.log(z);  // It will print function y
+    // console.log(x);  // It will print function x
+    // z();             // It will print value of a i.e. 7
+
+
+    //  // 3rd
+    function x() 
+    {
+        // for(var i = 1; i<=5; i++)
+        // {
+        //     setTimeout( function() 
+        //     {
+        //         console.log(i);
+        //     }, i*1000);
+        // }
+        
+        //  // OR PART of above for loop
+        // for(let i = 1; i<=5; i++)      // changed var variable in the above variable i
+        // {
+        //     setTimeout( function() 
+        //     {
+        //         console.log(i);
+        //     }, i*1000);
+        // }
+
+        // // OR 2nd PART 
+
+        
+            for(var i=1; i<=5; i++)
+            {
+                function close(z) {
+                    setTimeout(function() {
+                        console.log(z);
+                    }, z*1000);
+                }
+                close(i);
+            }
+    
+
+    console.log("Hello !!!")
+}
+x();
+
+
+</script>
+</html>

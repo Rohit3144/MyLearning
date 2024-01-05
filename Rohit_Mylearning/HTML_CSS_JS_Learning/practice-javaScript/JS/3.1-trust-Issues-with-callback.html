@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust isssues with Callback Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    console.log("start");
+
+    // This callback function should have to give o/p after 5 seconds but its waiting to for callsatck (occupied by while loop for 10 seconds) to be empty and callstack will empty after 10 seconds after that this callback function will be printed.
+    setTimeout(function cb() {
+        console.log("callback");
+    }, 5000);
+
+    console.log("End");
+    
+    let startDate = new Date().getTime();
+    let endDate = startDate;
+    while(endDate < startDate + 10000) {
+        endDate = new Date().getTime();
+    }
+
+    console.log("While expires here");
+</script>
+</html>

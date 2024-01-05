@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Document</title>
+</head>
+<body>
+    <h1>This is setTimeOut event</h1>
+    <button id="stop">STOP</button>
+</body>
+<script>
+    const sayRohit = function () {
+        console.log("Rohit")
+    }
+    // document.querySelector('h1').innerHTML = 'This is JS series'
+    const changeText = function () {
+    document.querySelector('h1').innerHTML = 'This is JS series'
+    }
+   
+    // setTimeout(sayRohit, 2000)
+    const stopMe = setTimeout(changeText, 2000)
+
+    document.querySelector('#stop').addEventListener('click', function () {
+        clearTimeout(changeText)
+        console.log('stopped')
+    } )
+
+
+</script>
+</html>
