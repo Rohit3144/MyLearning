@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 // import './App.css'
 
 function App() {
@@ -7,6 +7,8 @@ function App() {
   const [character, setCharacter] = useState(false);
   const [password, setPassword] = useState("");
 
+  const passwordRef = useRef(null)
+
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -14,13 +16,23 @@ function App() {
     if (number) str += "0123456789";
     if (character) str += "!@#$%^&*{}()[]-=+_`~";
 
-    for (let i = 0; i <= array.length; i++) {
+    for (let i = 0; i <= length; i++) {
       let char = Math.floor(Math.random() * str.length + 1);
-      pass = str.charAt(char);
+      pass += str.charAt(char);
     }
 
     setPassword(pass);
-  }, [length, number, character, password]);
+  }, [length, number, character, setPassword]);
+
+const copypasswordtoclipboard = useCallback( () => {
+  passwordRef.current?.select();
+  passwordRef.current?.setSelectionRange(0, 999)
+  window.navigator.clipboard.writeText(password)
+}, [password])
+
+  useEffect(() => {
+    passwordGenerator()
+  }, [length, number, character, passwordGenerator])
 
   return (
     <>
@@ -33,10 +45,12 @@ function App() {
             type="text"
             value={password}
             className="outline-none w-md py-1 px-3"
-            placeholder="password"
+            placeholder='Password'
             readOnly
+            ref={passwordRef}
           ></input>
-          <button className="outline-none bg-blue-700 text-white px-3 py-1 shrink-0">
+          <button onClick={copypasswordtoclipboard}
+          className="outline-none bg-blue-700 text-white px-3 py-1 shrink-0">
             COPY
           </button>
         </div>
