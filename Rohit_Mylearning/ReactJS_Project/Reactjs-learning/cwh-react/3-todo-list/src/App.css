@@ -1,0 +1,78 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+  background-color: aqua;
+  color: rgb(79, 64, 214);
+  padding: 10px;
+  text-align: center
+}
+
+body{
+  background-color: grey
+}
+
+.container{
+  background-color: greenyellow;
+  width: 70%;
+  min-height: 100vh;
+  margin: auto
+}
+
+.container > h1 {
+  text-align: center;
+  margin: 30px;
+}
+
+.container > form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+}
+
+.container > form > input, textarea, button {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px
+}
+
+button{
+  border: none;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.task{
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px
+}
+.task > div {
+  width: 100%;
+}
+.task span{
+  color: black
+}
+.task button{
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  font-size: 1.6rem;
+  background-color: crimson;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.task button:hover{
+  background-color: green
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
