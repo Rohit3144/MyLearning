@@ -7,7 +7,7 @@ function Home() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("");
 
-    console.log(title, description);
+    // console.log(title, description);
 
     const submitHandler = (e) => {
         e.preventDefault()
