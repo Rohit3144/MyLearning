@@ -6,7 +6,7 @@
 
 .container{
     width: 80%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: white;
     margin: auto;
     padding: 100px 50px;
@@ -35,7 +35,7 @@ button:hover{
 }
 
 .paras{
-    background-color: grey;
+    background-color: goldenrod;
     color: rgb(20, 20, 20);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 2px;

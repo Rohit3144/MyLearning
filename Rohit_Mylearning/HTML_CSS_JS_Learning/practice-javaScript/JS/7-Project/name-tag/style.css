@@ -1,0 +1,33 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: rgb(185, 143, 143);
+}
+
+.container{
+    width: 80%;
+    min-height: 100vh;
+    margin: auto;
+    background-color: white;
+}
+input{
+    padding: 10px;
+    width: 80%;
+    box-sizing: border-box;
+}
+.tags{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag{
+    background-color: blueviolet;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 30%;
+    color: brown;
+    margin: 5px;
+}

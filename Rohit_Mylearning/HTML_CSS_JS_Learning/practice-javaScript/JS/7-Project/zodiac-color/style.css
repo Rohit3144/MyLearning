@@ -1,0 +1,17 @@
+* {
+   margin: 0px; 
+   padding: 0px;
+}
+h1{
+   text-align: center;
+}
+
+select, button{
+   padding: 5px;
+   background-color: chocolate;
+   color: white;
+   border-radius: 10px;
+}
+button{
+   background-color: goldenrod;
+}
