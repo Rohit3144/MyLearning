@@ -2,17 +2,18 @@ function existing(data, newdata) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        resolve(data.push(newdata));
+        data.push(...newdata);
+        resolve(data);
       } catch {
         reject(error);
       }
     }, 2000);
   });
 }
-arr = [1, 2, 3, 4, 5];
-existing(arr, 33)
+arr = [11, 22, 33];
+existing(arr, [1, 2, 3, 'rk', 'rk'])
   .then((result) => {
-    console.log("Data added successfully ", result);
+    console.log("Data added successfully. Updated array: ", result);
   })
   .catch((error) => {
     console.log("Error in adding data ", error);
