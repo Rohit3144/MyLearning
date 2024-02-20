@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dom Document</title>
-</head>
-<body>
-    <div>hi</div>
+  </head>
+  <body>
+    <!-- <div>hi</div>
     <div id="thisone">how</div>
     <div class="ok">are</div>
-    <div class="ok">you</div>
-</body>
-<script>
+    <div class="ok">you</div> -->
+  </body>
+  <script>
     // console.log(document.body);
     // console.log(document.head);
     // console.log(document.documentElement);
@@ -28,15 +28,17 @@
     // console.log(thistag[2].textContent = 'newtext');
     // thistag[1].style.color = "Red";
 
-    console.log(window);
+    // console.log(window);
     // console.dir(window);
     // function newHeading() {
-    //     const h2 = document.createElement("h2");
+    const h1 = document.createElement("h1");
+    const h2 = document.createElement("h2");
+    console.log(h1);
+    console.log(h2);
     //     h2.innerText = "hiiiiiiiiii";
     //     // h2.textContent = "helloo";
-    //     document.body.prepend(h2);
+    document.body.append(h2);
     // }
     // newHeading();
-
   </script>
 </html>
