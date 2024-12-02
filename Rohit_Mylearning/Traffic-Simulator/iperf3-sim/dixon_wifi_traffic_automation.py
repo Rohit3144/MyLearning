@@ -10,6 +10,7 @@ from datetime import datetime
 from pathlib import Path
 import pyfiglet
 
+
 iperf3_dir = Path().absolute()
 iperf3_path = iperf3_dir / "iperf3.exe"
 
