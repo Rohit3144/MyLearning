@@ -9,15 +9,15 @@ on:
             - "Traffic_Simulator/iperf3-sim/**"
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
+    iper3-script:
+        runs-on: windows-latest
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: Set up Python
-              uses: actions/setup-python@v4
+              uses: actions/setup-python@v5
               with:
                   python-version: "3.10"
 
@@ -25,12 +25,12 @@ jobs:
               working-directory: Traffic_Simulator/iperf3-sim
               run: |
                   python -m venv venv
-                  source venv/bin/activate
+                  .\venv\Scripts\activate
                   pip install -r requirements.txt
                   pytest
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v3
+              uses: codecov/codecov-action@v5
               with:
                   token: ${{ secrets.CODECOV_TOKEN }} # Add this in your repo's secrets
                   files: ./Traffic_Simulator/iperf3-sim/coverage.xml
