@@ -11,6 +11,7 @@ from qtpy.QtWidgets import (
 )
 from qtpy.QtCore import Qt
 from request_handler import send_request, send_telnet_request, DebugMode
+from traffic_page import TrafficStatistics
 import re
 
 class ONTConfiguration(QWidget):
@@ -20,6 +21,7 @@ class ONTConfiguration(QWidget):
         self.debug_enabled = False
         self.olt_data = olt_data  # Store the received dictionary
         self.init_ui()
+        self.traffic_page = None 
 
     def init_ui(self):
         main_layout = QVBoxLayout()
@@ -91,7 +93,7 @@ class ONTConfiguration(QWidget):
 
         # Input Fields
         self.serial_number_input = QLineEdit(placeholderText="XXXX-XXXXXXXX or XXXXXXXXXXXX")
-        self.serial_number_input.setText("ZYOT-CE000292")
+        self.serial_number_input.setText("DPDP-C1000168")
 
         self.ont_id_input = QLineEdit(placeholderText="0-127")
         vlan_id = int(self.olt_data.get('vlan_id', 0))
@@ -131,9 +133,13 @@ class ONTConfiguration(QWidget):
         ont_service_group.setLayout(ont_service_layout)
         main_layout.addWidget(ont_service_group)
 
-        back_button = QPushButton("← Back")
-        back_button.setFixedSize(100, 30)
-        back_button.setStyleSheet(
+        # === Control Buttons ===
+        control_button_layout = QHBoxLayout()
+
+        # Back Button
+        self.back_button = QPushButton("← Back")
+        self.back_button.setFixedSize(100, 30)
+        self.back_button.setStyleSheet(
             """
             QPushButton {
                 background-color: #A5D6A7;
@@ -148,16 +154,75 @@ class ONTConfiguration(QWidget):
             }
         """
         )
-        back_button.clicked.connect(self.go_to_back)
-        main_layout.addWidget(back_button, alignment=Qt.AlignRight)
+        self.back_button.clicked.connect(self.go_to_back)
+
+        # Save Button
+        self.save_button = QPushButton("Save")
+        self.save_button.setFixedSize(100, 30)
+        self.save_button.clicked.connect(self.save_configurations)
+
+        # Next Button
+        self.next_button = QPushButton("Next →")
+        self.next_button.setFixedSize(100, 30)
+        self.next_button.setStyleSheet(
+            """
+            QPushButton {
+                background-color: #A5D6A7;
+                border: 2px solid #1e90ff;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                padding: 5px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+        """
+        )
+        self.next_button.clicked.connect(self.go_to_next)
+
+        control_button_layout.addWidget(self.back_button, alignment=Qt.AlignLeft)
+        control_button_layout.addStretch(1)
+        control_button_layout.addWidget(self.save_button, alignment=Qt.AlignCenter)
+        control_button_layout.addStretch(1)
+        control_button_layout.addWidget(self.next_button, alignment=Qt.AlignRight)
+        
+        main_layout.addLayout(control_button_layout)
 
         self.setLayout(main_layout)
+
+    def go_to_next(self):
+        """Create Traffic Page dynamically with latest ONT data"""
+    
+        if not hasattr(self, 'traffic_page') or self.traffic_page is None:
+            self.traffic_page = TrafficStatistics(self.stack, self)  # Pass ONT page reference
+            self.stack.addWidget(self.traffic_page)  # Add Traffic Page to stack
+    
+        self.stack.setCurrentWidget(self.traffic_page)  # Switch to Traffic Page
 
     def go_to_back(self):
         self.stack.setCurrentIndex(0)
 
     def on_checkbox_toggle(self, state):
         self.debug_enabled = state == 2
+
+    def update_olt_data(self, new_olt_data):
+        """Update ONT input fields with latest OLT data if not already set"""
+        
+        if self.profile_id_input.text().strip() == "":
+            self.profile_id_input.setText(new_olt_data.get('vlan_id', ""))
+        if self.tcont_id_input.text().strip() == "":
+            vlan_id = int(new_olt_data.get('vlan_id', 0))
+            default_tcont_id = vlan_id % 10
+            self.tcont_id_input.setText(str(default_tcont_id))
+        if self.gemport_id_input.text().strip() == "":
+            self.gemport_id_input.setText("1")
+        if self.serial_number_input.text().strip() == "":
+            self.serial_number_input.setText("DPDP-C1000168")
+        if self.ont_id_input.text().strip() == "":
+            vlan_id = int(new_olt_data.get('vlan_id', 0))
+            default_ont_id = vlan_id % 10
+            self.ont_id_input.setText(str(default_ont_id))
 
     def validate_and_get_ont_profile_data(self):
         """Validate ONT Profile Inputs, Show Errors if Any, and Return Valid Data"""
@@ -256,3 +321,8 @@ class ONTConfiguration(QWidget):
         data = self.validate_and_get_ont_service_data()
         if data:
             send_request("ont/delete_service", data, self.ont_service_output, DebugMode.DEBUG if self.debug_enabled else DebugMode.NO_DEBUG)
+
+    def save_configurations(self):
+        data = {"ip": self.olt_data.get("ip")}
+        send_request("ont/save_configurations", data, self.ont_service_output, DebugMode.DEBUG if self.debug_enabled else DebugMode.NO_DEBUG)
+
