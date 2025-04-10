@@ -2,3 +2,6 @@ requests
 fastapi
 pydantic
 uvicorn
+pyautogui
+psutil
+telnetlib

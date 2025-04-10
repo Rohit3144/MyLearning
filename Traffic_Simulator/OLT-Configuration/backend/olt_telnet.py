@@ -1,65 +1,55 @@
-import telnetlib
-import threading
+import subprocess
 import time
+import pyautogui
+import psutil
 
-# Telnet session management
-telnet_sessions = {}
-session_timeout = 300  # 5-minute timeout
+# Define MobaXterm executable path
+mobaxterm_path = r"C:\Program Files (x86)\Mobatek\MobaXterm\MobaXterm.exe"  # Update this if necessary
 
-def cleanup_idle_sessions():
-    """Remove idle Telnet sessions"""
-    while True:
-        current_time = time.time()
-        for ip, (tn, last_active) in list(telnet_sessions.items()):
-            if current_time - last_active > session_timeout:
-                print(f"Closing idle session for {ip}")
-                tn.close()
-                del telnet_sessions[ip]
-        time.sleep(10)
+# Telnet session details
+host = "192.168.1.1"
+username = "root"
+password = "#A!rtel@321#"
 
-# Start cleanup thread
-threading.Thread(target=cleanup_idle_sessions, daemon=True).start()
 
-def connect_to_olt(ip: str, username: str, password: str):
-    """Establish or reuse a Telnet connection"""
-    try:
-        if ip in telnet_sessions:
-            telnet_sessions[ip] = (
-                telnet_sessions[ip][0],
-                time.time(),
-            )  # Refresh session
-            return telnet_sessions[ip][0], "Reusing existing session!"
-
-        tn = telnetlib.Telnet(ip, timeout=5)
-        tn.read_until(b"Username:", timeout=3)
-        tn.write(username.encode("ascii") + b"\n")
-
-        tn.read_until(b"Password:", timeout=3)
-        tn.write(password.encode("ascii") + b"\n")
-
-        response = tn.read_until(b">", timeout=5).decode("ascii")
-
-        if "invalid" in response.lower():
-            tn.close()
-            return None, f"Telnet connection failed for IP {ip} | Reason: Username or password invalid."
-
-        telnet_sessions[ip] = (tn, time.time())  # Store session with timestamp
-        return tn, f"Connected to OLT {ip}"
-
-    except Exception as e:
-        return None, f"Telnet connection failed for IP {ip} | Reason: {str(e)}"
-
-def close_telnet_session(ip: str):
-    """Close a Telnet session"""
-    print(f"Closing session for {ip}")
-    tn_data = telnet_sessions.pop(ip, None)
-    if tn_data:
-        tn_data[0].close()
-        return True
+def is_mobaxterm_running():
+    """Check if MobaXterm is already running."""
+    for process in psutil.process_iter(attrs=["pid", "name"]):
+        if "MobaXterm.exe" in process.info["name"]:
+            return True
     return False
 
-def check_telnet_status(ip: str):
-    """Check if a Telnet session is active for a given IP."""
-    if ip in telnet_sessions:
-        return {"status": "Active", "message": f"Session is active for"}
-    return {"status": "Inactive", "message": f"No active session found for"}
+
+# Step 1: Launch MobaXterm if not already running
+if not is_mobaxterm_running():
+    try:
+        subprocess.Popen(mobaxterm_path)  # Open MobaXterm
+        time.sleep(5)  # Wait for MobaXterm to open
+    except Exception as e:
+        print(f"Error launching MobaXterm: {e}")
+        exit(1)
+else:
+    print("MobaXterm is already running.")
+
+# Step 2: Open a new session using an existing configuration
+pyautogui.hotkey("ctrl", "o")  # Open the session list
+time.sleep(2)
+
+# Step 3: Search for the saved session name (assuming it exists)
+session_name = "192.168.1.1"  # Update if your saved session has a different name
+pyautogui.write(session_name)
+time.sleep(1)
+pyautogui.press("enter")  # Open the saved session
+time.sleep(5)  # Wait for Telnet session to open
+
+# Step 4: Enter Username (if prompted)
+pyautogui.write(username)
+pyautogui.press("enter")
+time.sleep(2)
+
+# Step 5: Enter Password
+pyautogui.write(password)
+pyautogui.press("enter")
+time.sleep(2)
+
+print("Telnet session established successfully in MobaXterm!")
