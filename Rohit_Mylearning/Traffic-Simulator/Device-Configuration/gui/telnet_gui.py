@@ -5,8 +5,10 @@ from PyQt5.QtWidgets import (
     QLineEdit,
     QPushButton,
     QTextEdit,
+    QMessageBox,
 )
 import requests
+import re
 
 
 class TelnetGUI(QWidget):
@@ -48,10 +50,29 @@ class TelnetGUI(QWidget):
         self.setLayout(layout)
 
     def connect_telnet(self):
+        ip = self.ip_input.text().strip()
+        username = self.username_input.text().strip()
+        password = self.password_input.text()
+
+        # --- Input Validations ---
+        if not re.match(r"^(?:\d{1,3}\.){3}\d{1,3}$", ip):
+            self.show_error("Invalid IP address. Please enter a valid IPv4 address.")
+            return
+        if not re.match(r"^[A-Za-z]+$", username):
+            self.show_error("Username must contain alphabets only.")
+            return
+        if not re.match(
+            r"^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?`~]+$", password
+        ):
+            self.show_error(
+                "Password can contain alphabets, numbers, and special characters."
+            )
+            return
+
         data = {
-            "ip": self.ip_input.text(),
-            "username": self.username_input.text(),
-            "password": self.password_input.text(),
+            "ip": ip,
+            "username": username,
+            "password": password,
         }
         try:
             res = requests.post("http://127.0.0.1:8000/connect", json=data)
@@ -71,3 +92,6 @@ class TelnetGUI(QWidget):
             self.output_box.append(res.json().get("response", ""))
         except Exception as e:
             self.output_box.append(f"Exception: {e}")
+
+    def show_error(self, message):
+        QMessageBox.critical(self, "Validation Error", message)

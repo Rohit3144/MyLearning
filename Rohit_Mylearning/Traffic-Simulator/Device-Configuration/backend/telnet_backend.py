@@ -23,29 +23,38 @@ class TelnetSession:
                 host=ip, port=23, shell=None
             )
 
+            # Send username
             self.writer.write(username + "\n")
             await self.writer.drain()
             await asyncio.sleep(1)
 
+            # Send password
             self.writer.write(password + "\n")
             await self.writer.drain()
             await asyncio.sleep(1)
 
-            response = await self.reader.read(100)
-            return True, response
+            # Discard login prompt/shell banner
+            await self.reader.read(1024)
+
+            return True, "Login successful"
         except Exception as e:
             return False, str(e)
 
     async def disconnect(self):
         if self.writer:
-            self.writer.write("exit\n")
-            await self.writer.drain()
-            self.writer.close()
-            await self.writer.wait_closed()
-            return "Disconnected"
+            try:
+                self.writer.write("exit\n")
+                await self.writer.drain()
+                self.writer.close()  # No wait_closed(), not supported by telnetlib3
+                self.reader = None
+                self.writer = None
+                return "Disconnected successfully"
+            except Exception as e:
+                return f"Error while disconnecting: {e}"
         return "No session to disconnect"
 
 
+# Create a singleton Telnet session
 telnet = TelnetSession()
 
 
