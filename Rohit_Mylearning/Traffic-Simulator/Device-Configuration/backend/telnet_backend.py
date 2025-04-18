@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 import asyncio
 import telnetlib3
@@ -33,7 +33,7 @@ class TelnetSession:
             await self.writer.drain()
             await asyncio.sleep(1)
 
-            # Discard login prompt/shell banner
+            # Discard login banner and shell prompt
             await self.reader.read(1024)
 
             return True, "Login successful"
@@ -45,13 +45,25 @@ class TelnetSession:
             try:
                 self.writer.write("exit\n")
                 await self.writer.drain()
-                self.writer.close()  # No wait_closed(), not supported by telnetlib3
+                self.writer.close()  # telnetlib3 doesn't support wait_closed
                 self.reader = None
                 self.writer = None
                 return "Disconnected successfully"
             except Exception as e:
                 return f"Error while disconnecting: {e}"
         return "No session to disconnect"
+
+    async def send_command(self, command: str):
+        if not self.writer:
+            raise Exception("No active Telnet session")
+        try:
+            self.writer.write(command + "\n")
+            await self.writer.drain()
+            await asyncio.sleep(1)
+            output = await self.reader.read(1024)
+            return output.strip()
+        except Exception as e:
+            raise Exception(f"Failed to execute command: {e}")
 
 
 # Create a singleton Telnet session
@@ -70,3 +82,12 @@ async def connect(req: TelnetRequest):
 async def disconnect():
     msg = await telnet.disconnect()
     return {"status": "disconnected", "response": msg}
+
+
+@app.post("/command")
+async def send_command(command: str = Body(..., embed=True)):
+    try:
+        output = await telnet.send_command(command)
+        return {"response": output}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
