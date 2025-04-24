@@ -2,15 +2,51 @@ from PyQt5.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QLabel,
-    QLineEdit,
     QPushButton,
     QTextEdit,
+    QLineEdit,
     QMessageBox,
     QStackedLayout,
-    QHBoxLayout,
 )
+from PyQt5.QtCore import Qt, pyqtSignal
 import requests
 import re
+
+
+# 🔹 Custom QLineEdit for command input with arrow key history + Ctrl+Enter
+class CommandInputLineEdit(QLineEdit):
+    returnPressedWithText = pyqtSignal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.history = []
+        self.history_index = -1
+
+    def keyPressEvent(self, event):
+        key = event.key()
+        modifiers = event.modifiers()
+
+        if key == Qt.Key_Up:
+            if self.history and self.history_index > 0:
+                self.history_index -= 1
+                self.setText(self.history[self.history_index])
+        elif key == Qt.Key_Down:
+            if self.history and self.history_index < len(self.history) - 1:
+                self.history_index += 1
+                self.setText(self.history[self.history_index])
+            else:
+                self.clear()
+                self.history_index = len(self.history)
+        elif key == Qt.Key_Return or key == Qt.Key_Enter:
+            if modifiers == Qt.ControlModifier:
+                # Optional: Add multiline support here
+                pass
+            else:
+                text = self.text().strip()
+                if text:
+                    self.returnPressedWithText.emit(text)
+        else:
+            super().keyPressEvent(event)
 
 
 class TelnetGUI(QWidget):
@@ -37,7 +73,7 @@ class TelnetGUI(QWidget):
         self.status_label = QLabel("Status: Disconnected")
         self.output_box = QTextEdit()
         self.output_box.setReadOnly(True)
-        self.to_command_btn = QPushButton("Go to Command Page")
+        self.to_command_btn = QPushButton("Next")
         self.to_command_btn.setEnabled(False)
 
         self.connect_btn.clicked.connect(self.connect_telnet)
@@ -63,13 +99,17 @@ class TelnetGUI(QWidget):
         self.command_page = QWidget()
         command_layout = QVBoxLayout()
 
-        self.command_input = QLineEdit()
+        self.command_input = CommandInputLineEdit()
+        self.command_input.returnPressedWithText.connect(self.send_command)
+
         self.send_command_btn = QPushButton("Send Command")
         self.command_output_box = QTextEdit()
         self.command_output_box.setReadOnly(True)
-        self.back_btn = QPushButton("Back to Connection Page")
+        self.back_btn = QPushButton("Back")
 
-        self.send_command_btn.clicked.connect(self.send_command)
+        self.send_command_btn.clicked.connect(
+            lambda: self.send_command(self.command_input.text())
+        )
         self.back_btn.clicked.connect(lambda: self.stack.setCurrentIndex(0))
 
         command_layout.addWidget(QLabel("Enter Command:"))
@@ -125,21 +165,34 @@ class TelnetGUI(QWidget):
         except Exception as e:
             self.output_box.append(f"Exception: {e}")
 
-    def send_command(self):
-        cmd = self.command_input.text().strip()
+    def send_command(self, cmd: str):
+        cmd = cmd.strip()
         if not cmd:
             self.show_error("Please enter a command.")
             return
+
         try:
             res = requests.post("http://127.0.0.1:8000/command", json={"command": cmd})
             if res.status_code == 200:
-                self.command_output_box.append(f"> {cmd}\n{res.json()['response']}\n")
+                output = res.json()["response"]
+                self.command_output_box.append(f"> {cmd}\n{output}\n")
+
+                # Log the command
+                with open("telnet_log.txt", "a") as f:
+                    f.write(f"> {cmd}\n{output}\n\n")
+
+                # Add to history
+                self.command_input.history.append(cmd)
+                self.command_input.history_index = len(self.command_input.history)
             else:
                 self.command_output_box.append(
                     f"Error: {res.json().get('detail', 'Unknown')}"
                 )
         except Exception as e:
             self.command_output_box.append(f"Exception: {e}")
+        finally:
+            self.command_input.clear()
+            self.command_input.setFocus()
 
     def show_error(self, message):
         QMessageBox.critical(self, "Validation Error", message)

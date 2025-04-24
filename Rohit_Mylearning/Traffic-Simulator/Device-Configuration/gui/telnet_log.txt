@@ -1,0 +1,50 @@
+> ls
+ls
+root@DXB-O6001A:~#
+
+> pwd
+pwd
+/root
+root@DXB-O6001A:~#
+
+> ls: pwd;
+ls: pwd;
+-ash: ls:: not found
+root@DXB-O6001A:~#
+
+> ls
+ls
+root@DXB-O6001A:~#
+
+> ls pwd
+ls pwd
+ls: pwd: No such file or directory
+root@DXB-O6001A:~#
+
+> cd..
+cd..
+-ash: cd..: not found
+root@DXB-O6001A:~#
+
+> cd\
+cd\
+>
+
+> pwd
+pwd
+-ash: cdpwd: not found
+root@DXB-O6001A:~#
+
+> history
+history
+   0 ls
+   1 pwd
+   2 ls: pwd;
+   3 ls
+   4 ls pwd
+   5 cd..
+   6 cd\
+   7 pwd
+   8 history
+root@DXB-O6001A:~#
+
